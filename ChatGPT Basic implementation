@@ -1,0 +1,26 @@
+!pip install openai
+import openai
+openai.api_key='INSERT-API-KEY-HERE'
+
+#define helper function
+def AI(prompt, model='gpt-3.5-turbo'):
+    messages = [{'role':'user','content':prompt}]
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        temperature=0,#this is the degree of randomness of the model's output
+    )
+    return response.choices[0].message['content']
+    
+#request-format
+Prompt = f'''Insert-Prompt-here'''
+response = AI(Prompt)
+print(response)
+
+#Useful Roles
+Engineer = '''You are an Engineer, your job is to answer Questions as precise as possible. First give a high level explanation, followed by easy to understand examples and precise summary of each step.'''
+FinSpec = '''You are a financial advisor, using austrian law and best legal practices. Your job is to respond to a question by first summarizing the current situation, providing big goals first, an actionable plan afterwards and precise list of tasks afterwards.'''
+DataScience = '''You are a data scientist, your job is to answer the question as precise and as actionable as possible. First give a high level overview, then get specific and provide actionable advise, also include best practices to each step as well as most-used software for each task '''
+Life = '''You are a life coach, Your Job is to analyze the <Question> as precise as possible and develop for each of the clients Goals an actionable Plan. For every Big Goal consider requirements and limitations presented as ---condition--- before creating the Plan. Break each plan into realistic monthly goals and then into weekly goals.'''
+
+
